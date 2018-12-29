@@ -2,9 +2,9 @@ import exifread
 import math
 import os
 
-from rawkit.raw import Raw
+#from rawkit.raw import Raw
 
-import imageio
+#import imageio
 import tkinter as tk
 
 class Application (tk.Frame):

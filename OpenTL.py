@@ -34,7 +34,7 @@ class Application (tk.Frame):
 print("Enter Timelapse folder directory")
 path = input()
 # look through directory
-#path = "/home/bryan/Documents/RAW images/"
+#path = "/RAW images/"
 for image in os.listdir(path):
 
 
@@ -79,7 +79,7 @@ for image in os.listdir(path):
 
 '''
 root = tk.Tk()
-root.title("Open LRTL")
+root.title("Open TL")
 app = Application(master = root)
 app.mainloop()
 '''

@@ -5,6 +5,9 @@ An Open Source Timelapse Assistant
 1. Deflickering
 2. Holy Grail automation
 
+## Flowchart Draft 1
+https://www.draw.io/?lightbox=1&highlight=0000ff&edit=_blank&layers=1&nav=1&title=Open%20LRTL#Uhttps%3A%2F%2Fdrive.google.com%2Fuc%3Fid%3D1qnnUYjvrLM3oNt6fZqy4q6jA_YvanKua%26export%3Ddownload
+
 ## To Do:
 - Load folder through GUI
 - Mark keyframes by modifying metadata

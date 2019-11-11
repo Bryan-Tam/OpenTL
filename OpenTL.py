@@ -39,7 +39,7 @@ for image in os.listdir(path):
 
 
     # open each file
-    f = open(path+image, 'rb')
+    f = open(path+"/"+image, 'rb')
     print("Opening " + image + "...")
     tags = exifread.process_file(f)
 

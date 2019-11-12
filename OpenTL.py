@@ -1,6 +1,7 @@
 import exifread
 import math
 import os
+import matplotlib.pyplot as plt
 
 #from rawkit.raw import Raw
 
@@ -31,18 +32,27 @@ class Application (tk.Frame):
 #raw = rawpy.imread('RAW images/IMG_0968.CR2')
 #rgb = raw.postprocess()
 
-print("Enter Timelapse folder directory")
-path = input()
-# look through directory
-#path = "/RAW images/"
+print("Enter Timelapse folder directory ~~HARD CODE FOR TESTS")
+#path = input()
+path = 'RAW images'
+
+x=[]
+evl=[]
+lvl=[]
+
+#search through directory
 for image in os.listdir(path):
 
+    #exclude xmp's if edited
+    if (image[-3:] == 'xmp'):
+        continue
 
     # open each file
     f = open(path+"/"+image, 'rb')
     print("Opening " + image + "...")
     tags = exifread.process_file(f)
 
+    x.append(image)
     #out = open(image+".txt", "w")
     # go through all exif tags in single photo
     iso = 0.0
@@ -50,7 +60,6 @@ for image in os.listdir(path):
     shutter_internal = 0.0
     fnumber = 0.0
     for tag in tags.keys():
-    
         if tag == "EXIF ISOSpeedRatings":
             iso = int(str(tags[tag]))
         if tag == "EXIF ExposureTime":
@@ -71,8 +80,22 @@ for image in os.listdir(path):
     
     print( str(iso) + " " + str(shutter) + " f/" + str(fnumber))
     lv = (2 * math.log(fnumber,2)) - math.log(shutter_internal,2) - math.log(iso/100,2)
+    lvl.append(lv)
     print("Light Value: " + str(lv))
-    print("EV: " + str(math.log(fnumber*fnumber/shutter_internal,2)))
+    ev = math.log(fnumber*fnumber/shutter_internal,2)
+    evl.append(ev)
+    print("EV: " + str(ev))
+
+
+plt.plot(x,evl, label = "ev")
+plt.plot(x,lvl, label = "lv")
+# naming the x axis 
+plt.xlabel('image') 
+# naming the y axis 
+plt.ylabel('value')
+plt.legend()
+
+plt.show()
 
 # write to new file
 #imageio.imwrite('canon no process.tiff',raw)

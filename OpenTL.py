@@ -7,6 +7,8 @@ import os
 #import imageio
 import tkinter as tk
 
+import matplotlib.pyplot as plt
+
 class Application (tk.Frame):
     def __init__(self, master = None):
         super().__init__(master)
@@ -35,9 +37,13 @@ print("Enter Timelapse folder directory")
 path = input()
 # look through directory
 #path = "/RAW images/"
+
+xaxis = 0
+x = []
+y = []
+y2 = []
+
 for image in os.listdir(path):
-
-
     # open each file
     f = open(path+image, 'rb')
     print("Opening " + image + "...")
@@ -72,8 +78,16 @@ for image in os.listdir(path):
     print( str(iso) + " " + str(shutter) + " f/" + str(fnumber))
     lv = (2 * math.log(fnumber,2)) - math.log(shutter_internal,2) - math.log(iso/100,2)
     print("Light Value: " + str(lv))
+    ev = math.log(fnumber*fnumber/shutter_internal,2)
     print("EV: " + str(math.log(fnumber*fnumber/shutter_internal,2)))
+    x.append(xaxis)
+    y.append(lv)
+    y2.append(ev)
+    xaxis+=1
 
+plt.plot(x,y)
+plt.plot(x,y2)
+plt.show()
 # write to new file
 #imageio.imwrite('canon no process.tiff',raw)
 
